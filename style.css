@@ -417,3 +417,41 @@ textarea {
   -webkit-appearance: button; /* 1 */
   font: inherit; /* 2 */
 }
+
+/** CUSTOM */
+body {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  font-family: helvetica;
+  font-size: 16px;
+  line-height: 20px;
+}
+.container {
+  max-width: 768px;
+  /* margin: 0 auto; */
+}
+.header {
+  margin-bottom: 1em;
+}
+.footer {
+  margin-top: 2em;
+  font-size: 80%;
+}
+.content img {
+  max-width: 100%;
+}
+.brand {
+  display: inline-block;
+  margin-right: .75em;
+  margin-top: .5em;
+}
+.menu {
+  display: inline-block;
+  vertical-align: top;
+  line-height: 55px;
+}
+.menu > a {
+  margin-right: .5em
+}
