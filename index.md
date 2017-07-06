@@ -1,5 +1,5 @@
-OuestCode is a company that creates sound IT products. Based in Brittany, on
-the French west coast.
+OuestCode is a software company that develops products and provides consulting
+services. Based in Brittany, on the French west coast.
 
 Currently a [team of 1][about], I strive to create useful and simple
 [products][products] at the intersection of the Dev and Ops domain.
