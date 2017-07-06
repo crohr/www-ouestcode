@@ -459,7 +459,7 @@ body {
   padding-bottom: 2px;
   border-bottom: 2px solid transparent;
 }
-.menu > a:hover {
+.menu > a:hover, body.products a.products, body.about a.about, body.consulting a.consulting {
   border-color: #999;
 }
 
@@ -476,5 +476,5 @@ pre {
 	overflow: auto;
 }
 h2 {
-  margin-top: 1.5em;
+  /* margin-top: 1.5em; */
 }

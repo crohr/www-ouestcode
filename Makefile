@@ -7,6 +7,7 @@ all: $(OUTFILES)
 	m4 -PEIinc header.inc > $@
 	markdown $< >> $@
 	cat footer.inc >> $@
+	sed -i 's|<body>|<body class="$(shell dirname $@)">|' $@
 
 clean:
 	rm -f $(OUTFILES)

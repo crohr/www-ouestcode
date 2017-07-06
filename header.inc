@@ -21,9 +21,9 @@
           <a href="/"><img src="/img/ouestcode.svg" height=40 class="logo"/></a>
         </div>
         <div class="menu">
-          <a href="/#products">Products</a>
-	  <a href="/#consulting">Consulting</a>
-	  <a href="/about">About</a>
+          <a href="/products" class="products">Products</a>
+	  <a href="/consulting" class="consulting">Consulting</a>
+	  <a href="/about" class="about">About</a>
         </div>
       </div>
     </div>
