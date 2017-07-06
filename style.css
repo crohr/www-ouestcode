@@ -475,3 +475,6 @@ pre code {
 pre {
 	overflow: auto;
 }
+h2 {
+  margin-top: 1.5em;
+}
