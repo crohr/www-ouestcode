@@ -12,4 +12,7 @@ all: $(OUTFILES)
 clean:
 	rm -f $(OUTFILES)
 
+optimize:
+	optipng img/*.png
+
 PHONY: all clean
