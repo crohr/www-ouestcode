@@ -1,9 +1,12 @@
-Over the years I believe I developed a strong ability to get up and running on
-new/existing projects very fast. Also, having products (and paying clients)
+Over the years I developed a strong ability to get up and running on
+new/existing projects very quickly. Also, having products (and paying clients)
 myself means I understand what drives a business and can often find solutions
 that were not envisioned by other members of the project.
 
 Examples of things I've done in the past:
+
+* Greenfield RubyOnRails projects (obviously), including real-time features,
+  heavy frontend JavaScript work, database optimizations.
 
 * Revamping AWS infrastructure for a company offering a SaaS, reducing AWS bill
 from $15k to $2.5k. And at the same time, getting them a nice platform and
@@ -27,8 +30,6 @@ migration, and unit/integration/system tests.
 * Advising and implementing Single Sign On solutions.
 
 * ElasticSearch interactions (indexing, aggregations, reporting).
-
-* Greenfield RubyOnRails projects (obviously).
 
 I'm preferably working remotely, but for larger projects I will generally
 travel to meet your team at the beginning of the contract. I can also work on
