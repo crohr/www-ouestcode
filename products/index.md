@@ -23,7 +23,7 @@ Continuous Delivery.
 
 [pullpreview]: https://pullpreview.com
 [packager]: https://packager.io
-[packagehall]: https://packagehall.com
+[packagehall]: https://dl.packager.io
 [chunk]: http://chunk.io
 [buildcurl]: http://buildcurl.com
 

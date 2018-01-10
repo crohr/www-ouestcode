@@ -12,6 +12,9 @@ all: $(OUTFILES)
 clean:
 	rm -f $(OUTFILES)
 
+preview:
+	python -m SimpleHTTPServer 8080
+
 optimize:
 	optipng img/*.png
 

@@ -443,24 +443,24 @@ body {
   max-width: 100%;
 }
 .brand {
+  display: inline-block;
   margin-right: .75em;
   margin-top: .5em;
 }
 .menu {
   display: inline-block;
-  vertical-align: top;
-  line-height: 55px;
+  vertical-align: 10%;
 }
 .menu > a {
   margin-right: .5em;
   color: indianred;
   font-weight: bold;
   text-decoration: none;
-  padding-bottom: 2px;
-  border-bottom: 2px solid transparent;
+  padding: 4px 8px;
 }
 .menu > a:hover, body.products a.products, body.about a.about, body.consulting a.consulting {
-  border-color: #999;
+  background-color: indianred;
+  color: white;
 }
 
 code, samp, kbd {
