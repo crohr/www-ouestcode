@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Codelicacy</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#2d363a">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#2d363a">
+  </head>
+  <body class="journal">
+    <div class="container">
+      <div class="header">
+        <div class="brand">
+          <a href="/"><img src="/img/codelicacy.svg" class="logo"/></a>
+        </div>
+        <div class="menu">
+          <a href="/products" class="products">Products</a>
+	  <a href="/consulting" class="consulting">Consulting</a>
+	  <a href="/journal" class="journal">Journal</a>
+	  <a href="/about" class="about">About</a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+
+<h1 id="using-git-crypt-to-transparently-encrypt-sensitive-data-in-a-git-repository">Using git-crypt to transparently encrypt sensitive data in a git repository</h1>
+<p>Let&#39;s say your job includes provisioning servers, and/or that you want to share passwords with selected people in your team. Wouldn&#39;t it be great to be able to use a git repo for that?</p>
+<p><img src="https://cloud.githubusercontent.com/assets/6114/11686850/4e9017d6-9e7b-11e5-9527-6641ac52bae9.png" alt="lock-10-256x256"></p>
+<h2 id="requirements">Requirements</h2>
+<ol>
+<li><p>Install <a href="https://github.com/AGWA/git-crypt"><code>git-crypt</code></a>.</p><pre><code>brew install git-crypt
+</code></pre><p>On other systems than MacOS, you can either compile the program from source (recommended), or use my <a href="https://hub.docker.com/r/crohr/git-crypt/">docker image</a>.</p></li>
+</ol>
+<h2 id="usage">Usage</h2>
+<ol>
+<li><p>Clone the repo that will host your sensitive data:</p><pre><code>git clone git@github.com:my-org/ops.git
+</code></pre></li>
+<li><p>Initialize <code>git-crypt</code>:</p><pre><code>cd ops/
+git-crypt init
+</code></pre></li>
+<li><p>Add yourself to the list of authorized users:</p><pre><code>git-crypt add-gpg-user --trusted USER_ID
+</code></pre><p><code>USER_ID</code> can be a key ID, a full fingerprint, an email address, or anything else that uniquely identifies a public key to GPG. Add the <code>--trusted</code> option unless you want to manually trust the user using GPG&#39;s original vision of a web-of-trust.</p></li><li><p>Commit a <code>.gitattributes</code> file containing the list of file extensions to encrypt (see below).</p></li><li><p>Commit new files that use one of the protected extensions and verify that they appear as gibberish on Github/Gitweb, etc.</p></li><li><p>Share the repo with others by adding their GPG key:</p><pre><code>git-crypt add-gpg-user --trusted USER_ID
+</code></pre><p>Note: <code>git-crypt add-gpg-user</code> will add and commit a GPG-encrypted key file in the .git-crypt directory of the root of your repository.</p><p>Now, that user can unlock the repo with her GPG key:</p><pre><code>  cd ops/
+  git-crypt unlock
+</code></pre></li>
+</ol>
+<h2 id="encrypted-files">Encrypted files</h2>
+<p>Assuming you commit the following <code>.gitattributes</code> file:</p><pre><code>secretfile filter=git-crypt diff=git-crypt
+*.key filter=git-crypt diff=git-crypt
+*.password filter=git-crypt diff=git-crypt
+*.env filter=git-crypt diff=git-crypt
+*.env.json filter=git-crypt diff=git-crypt
+*.yaml filter=git-crypt diff=git-crypt
+*.yml filter=git-crypt diff=git-crypt
+</code></pre>
+<p>Any file with one of the following extensions will automatically be encrypted when you commit and <code>git push</code>:</p><ul><li><code>.key</code></li><li><code>.password</code></li><li><code>.yaml</code> or <code>.yml</code></li><li><code>.env</code></li></ul><p>Those files will still appear in clear-text if you look at them in your terminal, or using any of the git commands. Any new files that you commit with an extension present in the <code>.gitattributes</code> file will be transparently encrypted for you.</p>      </div>    </div>    <div class="container">      <div class="footer">	<hr/>	<p>	  <a href="mailto:contact@codelicacy.com">contact@codelicacy.com</a>	  -
+          Codelicacy, Cyril Rohr EIRL - 99 rue de la rabine, 35510 Cesson-Sévigné, France
+	</p>
+      </div>
+    </div>
+  </body>
+</html>

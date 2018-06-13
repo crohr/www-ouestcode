@@ -30,13 +30,16 @@
     <div class="container">
       <div class="content">
 
-<h3 id="2015">2015</h3>
-<ul>
-<li><a href="4-turn-your-github-issues-into-blog-posts.html">Turn your Github issues into blog posts</a></li>
-<li><a href="3-using-git-crypt-to-transparently-encrypt-sensitive-data-in-a-git-repository.html">Using git-crypt to transparently encrypt sensitive data in a git repository</a></li>
-<li><a href="2-how-to-fetch-temporary-security-credentials-using-iam-roles-from-ec2-instances.html">How to fetch temporary security credentials using IAM Roles from EC2 instances</a></li>
-<li><a href="1-a-docker-container-to-cleanup-your-docker-containers.html">A docker container to cleanup your docker containers</a></li>
-</ul>      </div>
+<h1 id="a-docker-container-to-cleanup-your-docker-containers">A docker container to cleanup your docker containers</h1>
+<p>If you don&#39;t use the <code>--rm</code> flag when launching docker containers (and even if you do), your disks are going to slowly but surely fill up with all the cached layers and unused images. People usually schedule <a href="https://github.com/chadoe/docker-cleanup-volumes">docker-cleanup-volumes</a> in a cron to counter this, but now you can also just run a docker image that does it for you:</p><pre><code class="lang-bash">docker run \
+  -d \
+  --restart=on-failure \
+  -e KEEP_IMAGES=&quot;ubuntu:14.04 corp/important-image:tag&quot; \
+  -v /var/run/docker.sock:/var/run/docker.sock:rw \
+  -v /var/lib/docker:/var/lib/docker:rw \
+  meltwater/docker-cleanup:latest
+</code></pre>
+<p>See the <a href="https://github.com/meltwater/docker-cleanup">relevant repo</a> for more details and a systemd init script.</p>      </div>
     </div>
     <div class="container">
       <div class="footer">

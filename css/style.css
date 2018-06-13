@@ -150,7 +150,8 @@ dfn {
  */
 
 h1 {
-  font-size: 2em;
+  font-size: 36px;
+  line-height: 45px;
   margin: 0.67em 0;
 }
 
@@ -443,6 +444,8 @@ body {
 }
 .content img {
   max-width: 100%;
+  float: right;
+  text-align: center;
 }
 .brand {
   display: block;
@@ -480,6 +483,11 @@ pre code {
 }
 pre {
 	overflow: auto;
+  background-color: #f6f8fa;
+  padding: 16px;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
 }
 h2 {
   /* margin-top: 1.5em; */
