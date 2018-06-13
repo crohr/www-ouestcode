@@ -1,0 +1,11 @@
+services:
+  web:
+    build: .
+    domain:
+      - codelicacy.com
+    port: 80
+    health: /health.txt
+    scale:
+      count: 1
+      cpu: 128
+      memory: 64

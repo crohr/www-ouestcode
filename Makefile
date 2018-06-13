@@ -3,7 +3,7 @@ OUTFILES = $(INFILES:.md=.html)
 
 all: $(OUTFILES)
 
-%.html: %.md footer.inc header.inc style.css
+%.html: %.md footer.inc header.inc css/style.css
 	m4 -PEIinc header.inc > $@
 	bin/mark -i $< >> $@
 	cat footer.inc >> $@
@@ -13,7 +13,8 @@ clean:
 	rm -f $(OUTFILES)
 
 preview: all
-	python -m SimpleHTTPServer 8080
+	docker build -t codelicacy .
+	docker run -it -p 8080:80 -v $(shell pwd):/usr/share/nginx/html codelicacy
 
 optimize:
 	optipng img/*.png
