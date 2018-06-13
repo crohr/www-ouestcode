@@ -489,6 +489,11 @@ pre {
   font-size: 85%;
   line-height: 1.45;
 }
+.clearfix:after {
+  clear: both;
+  content: "";
+  display: table;
+}
 h2 {
   /* margin-top: 1.5em; */
 }

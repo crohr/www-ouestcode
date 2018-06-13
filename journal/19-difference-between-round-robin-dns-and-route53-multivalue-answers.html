@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Codelicacy</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#2d363a">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#2d363a">
+  </head>
+  <body class="journal">
+    <div class="container">
+      <div class="header">
+        <div class="brand">
+          <a href="/"><img src="/img/codelicacy.svg" class="logo"/></a>
+        </div>
+        <div class="menu">
+          <a href="/products" class="products">Products</a>
+	  <a href="/consulting" class="consulting">Consulting</a>
+	  <a href="/journal" class="journal">Journal</a>
+	  <a href="/about" class="about">About</a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+
+<h1 id="difference-between-round-robin-dns-and-route53-multivalue-answers">Difference between round-robin DNS and Route53 multivalue answers</h1>
+<p>Until now, if you want to load-balance traffic between multiple servers, you can either:</p>
+<ul>
+<li>use DNS round-robin to distribute traffic to a pool of IPs (but if one server is down you might get some traffic sent to it if clients are not clever enough to try all IPs returned by the DNS server)</li>
+<li>use a load-balancer appliance (ELB, HAProxy, etc.) to handle the server pool and removal of unhealthy servers automatically, based on health checks (but it can be expensive to run, and/or another thing to monitor).</li>
+</ul>
+<p>But Amazon just <a href="https://aws.amazon.com/about-aws/whats-new/2017/06/amazon-route-53-announces-support-for-multivalue-answers-in-response-to-dns-queries/">announced</a> a few days ago they were adding a new type of routing policy for DNS records: multivalue answers, with support for health checks.</p>
+<p>Basically this means that you can create multiple records for the same domain name, and associate each record with a different server IP and a health check that returns whether this server is up or not. Based on that, Route53 will reply to DNS queries for the domain name with just the IPs that are healthy, meaning that contrary to classic round-robin DNS, client programs will not see unhealthy IPs in the DNS response.</p>
+<h2 id="demo">Demo</h2>
+<p>First, let&#39;s create two EC2 instances with a simple nginx server running on it, which returns the hostname of the server it is currently running on. For this test you can use a t2.nano instance, and setup the user-data to automatically install nginx and the default index.html page with <a href="https://raw.githubusercontent.com/crohr/route53-multivalue-answers/master/install.sh">this script</a>:</p>
+<pre><code class="lang-shell">#!/bin/bash
+set -e
+apt-get update -qq &amp;&amp; apt-get install -y nginx
+hostname &gt; /var/www/html/index.nginx-debian.html
+</code></pre>
+<p class="clearfix">
+<img width="1409" alt="Setup EC2 instance with user-data" src="https://user-images.githubusercontent.com/6114/27764859-d33ae2fe-5e9b-11e7-93c1-578be62c0e96.png">
+
+<img width="830" alt="Our 2 servers are running" src="https://user-images.githubusercontent.com/6114/27764873-0792d912-5e9c-11e7-9ea2-0395a093c02c.png">
+</p>
+<p>Next, you will need to create 2 Route53 health checks (one for each server):</p>
+<p class="clearfix">
+<img width="1214" alt="Health check server 1" src="https://user-images.githubusercontent.com/6114/27764880-46abb72c-5e9c-11e7-8135-378fb56c3778.png">
+
+<img width="1216" alt="Health check server 2" src="https://user-images.githubusercontent.com/6114/27764881-46b14b42-5e9c-11e7-8a26-99fb2cf26810.png">
+</p>
+<p>For now the health check status is <code>Unknown</code>, but a few seconds after they should both switch to <code>Healthy</code>:</p><p class="clearfix"><img width="1082" alt="unknown health" src="https://user-images.githubusercontent.com/6114/27764886-5d06dbaa-5e9c-11e7-9648-4805cd211847.png"><img width="1071" alt="healthy!" src="https://user-images.githubusercontent.com/6114/27764932-1acaa2e8-5e9d-11e7-804a-1b4f3ccf85ca.png"></p><p>You now have 2 servers, with the corresponding health checks. Let&#39;s create the final piece with the 2 DNS records, using the new multivalue answers policy:</p><p class="clearfix"><img width="50%" alt="dns record server 1" src="https://user-images.githubusercontent.com/6114/27764946-4e33c1b4-5e9d-11e7-9347-46ffea2cade2.png"><img width="50%" alt="dns record server 2" src="https://user-images.githubusercontent.com/6114/27764947-4e35a696-5e9d-11e7-9c75-09439dc883c5.png"></p><p>After a little while, both IPs should show in the <code>dig</code> report:</p><pre><code>$ dig poor-man-lb.barebuild.com
+poor-man-lb.barebuild.com. 60INA52.23.222.220
+poor-man-lb.barebuild.com. 60INA52INA34.227.93.176
+</code></pre>
+<p>Now, if you stop one of the servers, after about 1 min (or lower if you set a TTL &lt; 60s, which is probably a good idea if you&#39;re using this policy) the unhealthy host should disappear:</p>
+<pre><code>$ dig poor-man-lb.barebuild.com
+poor-man-lb.barebuild.com. 60sINA52.23.222.220
+</code></pre>
+<h2 id="is-it-useful-">Is it useful?</h2>
+<p>This is definitely no replacement for a proper load-balancer, but if you have a large number of backend servers and/or dumb clients that only try the first (or first N) IPs returned, this can prove useful as you don&#39;t run the risk of exposing unhealthy servers in your DNS replies.</p>
+<p>Although nowadays, in a round-robin DNS setup, all browsers, cURL, etc. are able to try the other IPs until one connects, but again you never know what old stack/program your clients may be using to connect to your service, so using this new Route53 policy puts you on the safe there. Also, keeping unhealthy IPs in DNS replies is probably not that great performance-wise, as the client will have to potentially try to connect to multiple IPs before being able to send a request.</p>      </div>
+    </div>
+    <div class="container">
+      <div class="footer">
+	<hr/>
+	<p>
+	  <a href="mailto:contact@codelicacy.com">contact@codelicacy.com</a>
+	  -
+          Codelicacy, Cyril Rohr EIRL - 99 rue de la rabine, 35510 Cesson-Sévigné, France
+	</p>
+      </div>
+    </div>
+  </body>
+</html>

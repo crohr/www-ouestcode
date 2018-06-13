@@ -3,8 +3,9 @@ services:
     build: .
     domain:
       - codelicacy.com
+      - ebarnouflant.com
     port: 80
-    health: /health.txt
+    health: /health
     scale:
       count: 1
       cpu: 128
