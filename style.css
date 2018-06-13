@@ -422,11 +422,11 @@ textarea {
 body {
   margin-top: 1em;
   margin-bottom: 1em;
-  margin-left: 1.5em;
-  margin-right: 1.5em;
   font-family: 'helvetica neue', helvetica, futura;
   font-size: 18px;
   line-height: 28px;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
 }
 .container {
   max-width: 768px;
@@ -434,6 +434,8 @@ body {
 }
 .header {
   margin-bottom: 1em;
+  margin-left: -1.5em;
+  margin-right: -1.5em;
 }
 .footer {
   margin-top: 2em;
@@ -443,13 +445,17 @@ body {
   max-width: 100%;
 }
 .brand {
-  display: inline-block;
-  margin-right: .75em;
-  margin-top: .5em;
+  display: block;
+  text-align: center;
 }
+.logo {
+  width: 500px;
+}
+
 .menu {
-  display: inline-block;
-  vertical-align: 10%;
+  display: block;
+  text-align: center;
+  margin-bottom: 2em;
 }
 .menu > a {
   margin-right: .5em;
@@ -458,7 +464,7 @@ body {
   text-decoration: none;
   padding: 4px 8px;
 }
-.menu > a:hover, body.products a.products, body.about a.about, body.consulting a.consulting {
+.menu > a:hover, body.products a.products, body.about a.about, body.consulting a.consulting, body.journal a.journal {
   background-color: indianred;
   color: white;
 }
@@ -477,4 +483,11 @@ pre {
 }
 h2 {
   /* margin-top: 1.5em; */
+}
+
+/* responsive */
+@media only screen and (max-width: 500px) {
+  .logo {
+    width: 100%;
+  }
 }

@@ -15,7 +15,7 @@
     <meta name="msapplication-config" content="/img/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
   </head>
-  <body class="products">
+  <body class=".">
     <div class="container">
       <div class="header">
         <div class="brand">
@@ -32,20 +32,9 @@
     <div class="container">
       <div class="content">
 
-<p>Codelicacy develops products to improve the day-to-day life of developers and
-ops people. Most of the paid products revolve around Continuous Integration and
-Continuous Delivery.</p>
-<ul>
-<li><p><a href="https://packager.io">Packager.io</a> - The best way to automatically package your Ruby,
-NodeJS, Go, Python apps as a .deb or .rpm package</p><p><img src="/img/packager-io.png"></p></li>
-<li><p><a href="https://pullpreview.com">PullPreview.com</a> - On-demand preview environments for your
-project&#39;s pull requests, branches, tags, you name it.</p><p><img src="/img/pullpreview.png"></p></li>
-<li><p><a href="http://chunk.io">Chunk.io</a> - Want to upload stuff on the web from the command-line?</p><p><img src="/img/chunk-io.png"></p></li>
-<li><p><a href="http://buildcurl.com">BuildcURL.com</a> - Get popular binaries (e.g. Ruby) for a wide
-range of distribution, compiled on-demand.</p></li>
-<li><p><a href="https://dl.packager.io">PackageHall.com</a> - Package repository management, reinvented</p></li>
-</ul>
-      </div>
+<h2 id="prerequisites">Prerequisites</h2>
+<pre><code>docker run -it --rm -v $(pwd)/bin:/go/bin golang go get github.com/a8m/mark/cmd/mark
+</code></pre>      </div>
     </div>
     <div class="container">
       <div class="footer">

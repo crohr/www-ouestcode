@@ -14,9 +14,9 @@ continuous integration system to build, test, deploy, and monitor their
 services.
 
 * Migrating a large (and critical) RubyOnRails project from Rails2.x/Ruby1.8 to
-Rails4.x/Ruby2.x, adding a strong test suite and CI pipeline to ensure the main
-features were working with the new stack as we went over the numerous changes
-required to upgrade.
+  Rails4.x/Ruby2.x (and then Rails 5.x), adding a strong test suite and CI
+pipeline to ensure the main features were working with the new stack as we went
+over the numerous changes required to upgrade.
 
 * Setup of CI/CD systems.
 

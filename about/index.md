@@ -1,4 +1,4 @@
-OuestCode is run by Cyril Rohr.
+Codelicacy is run by Cyril Rohr.
 
 You can find me on [Twitter][twitter], [GitHub][github], and [LinkedIn][linkedin].
 

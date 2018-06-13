@@ -15,7 +15,7 @@
     <meta name="msapplication-config" content="/img/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
   </head>
-  <body class="products">
+  <body class="journal">
     <div class="container">
       <div class="header">
         <div class="brand">
@@ -32,20 +32,18 @@
     <div class="container">
       <div class="content">
 
-<p>Codelicacy develops products to improve the day-to-day life of developers and
-ops people. Most of the paid products revolve around Continuous Integration and
-Continuous Delivery.</p>
-<ul>
-<li><p><a href="https://packager.io">Packager.io</a> - The best way to automatically package your Ruby,
-NodeJS, Go, Python apps as a .deb or .rpm package</p><p><img src="/img/packager-io.png"></p></li>
-<li><p><a href="https://pullpreview.com">PullPreview.com</a> - On-demand preview environments for your
-project&#39;s pull requests, branches, tags, you name it.</p><p><img src="/img/pullpreview.png"></p></li>
-<li><p><a href="http://chunk.io">Chunk.io</a> - Want to upload stuff on the web from the command-line?</p><p><img src="/img/chunk-io.png"></p></li>
-<li><p><a href="http://buildcurl.com">BuildcURL.com</a> - Get popular binaries (e.g. Ruby) for a wide
-range of distribution, compiled on-demand.</p></li>
-<li><p><a href="https://dl.packager.io">PackageHall.com</a> - Package repository management, reinvented</p></li>
-</ul>
-      </div>
+<h1 id="a-docker-container-to-cleanup-your-docker-containers">A docker container to cleanup your docker containers</h1>
+<p>If you don&#39;t use the <code>--rm</code> flag when launching docker containers (and even if you do), your disks are going to slowly but surely fill up with all the cached layers and unused images. People usually schedule <a href="https://github.com/chadoe/docker-cleanup-volumes">docker-cleanup-volumes</a> in a cron to counter this, but now you can also just run a docker image that does it for you:</p>
+<pre><code class="lang-bash">
+docker run \
+  -d \
+  --restart=on-failure \
+  -e KEEP_IMAGES=&quot;ubuntu:14.04 corp/important-image:tag&quot; \
+  -v /var/run/docker.sock:/var/run/docker.sock:rw \
+  -v /var/lib/docker:/var/lib/docker:rw \
+  meltwater/docker-cleanup:latest
+</code></pre>
+<p>See the <a href="https://github.com/meltwater/docker-cleanup">relevant repo</a> for more details and a systemd init script.</p>      </div>
     </div>
     <div class="container">
       <div class="footer">
