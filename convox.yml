@@ -2,8 +2,10 @@ services:
   web:
     build: .
     domain:
+      - ouestcode.com
       - codelicacy.com
       - ebarnouflant.com
+      - crohr.me
     port: 80
     health: /health
     scale:

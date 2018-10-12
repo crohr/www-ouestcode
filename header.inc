@@ -3,14 +3,16 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Codelicacy</title>
+    <title>OuestCode - Ruby / Rails / DevOps Consulting</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
   </head>
   <body>
     <div class="container">
       <div class="header">
         <div class="brand">
-          <a href="/"><img src="/img/codelicacy.svg" class="logo"/></a>
+          <a href="/"><img src="/img/logo.svg" class="logo"/></a>
         </div>
         <div class="menu">
           <a href="/products" class="products">Products</a>

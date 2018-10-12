@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
   </head>
-  <body class=".">
+  <body class="journal/radar">
     <div class="container">
       <div class="header">
         <div class="brand">
@@ -25,9 +25,12 @@
     <div class="container">
       <div class="content">
 
-<h2 id="prerequisites">Prerequisites</h2>
-<pre><code>docker run -it --rm -v $(pwd)/bin:/go/bin golang go get github.com/a8m/mark/cmd/mark
-</code></pre>      </div>
+<h1 id="nlb-in-front-of-alb">NLB in front of ALB</h1>
+<p>Aka putting a Network Load Balancer in front of an Application Load Balancer,
+so that you can share static IPs with your clients, and still have high
+availability.</p>
+<p>Yes, this is actually possible!</p>
+<p><a href="https://aws.amazon.com/fr/blogs/networking-and-content-delivery/using-static-ip-addresses-for-application-load-balancers/">https://aws.amazon.com/fr/blogs/networking-and-content-delivery/using-static-ip-addresses-for-application-load-balancers/</a>.</p>      </div>
     </div>
     <div class="container">
       <div class="footer">

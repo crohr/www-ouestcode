@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
   </head>
-  <body class=".">
+  <body class="journal/archive">
     <div class="container">
       <div class="header">
         <div class="brand">
@@ -25,16 +25,19 @@
     <div class="container">
       <div class="content">
 
-<h2 id="prerequisites">Prerequisites</h2>
-<pre><code>docker run -it --rm -v $(pwd)/bin:/go/bin golang go get github.com/a8m/mark/cmd/mark
-</code></pre>      </div>
-    </div>
-    <div class="container">
-      <div class="footer">
-	<hr/>
-	<p>
-	  <a href="mailto:contact@ouestcode.com">contact@ouestcode.com</a>
-	  -
+<h1 id="how-to-generate-a-self-signed-certificate-in-non-interactive-mode">How to generate a self-signed certificate in non interactive mode</h1>
+<p>If you ever need to generate a self-signed SSL certificate automatically (i.e.
+without any prompt or interactive questions), here is how you would do it:</p>
+<pre><code>openssl genrsa -des3 -passout pass:p4ssw0rd -out server.pass.key 2048
+openssl rsa -passin pass:p4ssw0rd -in server.pass.key -out server.key
+rm server.pass.key
+openssl req -new -key server.key -out server.csr \
+  -subj &quot;/C=UK/ST=Warwickshire/L=Leamington/O=OrgName/OU=IT Department/CN=example.com&quot;
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+
+</code></pre>
+<p>(adapted from <a href="https://devcenter.heroku.com/articles/ssl-certificate-self">Heroku&#39;s procedure</a>).</p>
+<p>Then, just use the generated <code>server.key</code> and <code>server.crt</code> files.</p>      </div>    </div>    <div class="container">      <div class="footer">	<hr/>	<p>	  <a href="mailto:contact@ouestcode.com">contact@ouestcode.com</a>	  -
           OuestCode, Cyril Rohr EIRL - 99 rue de la rabine, 35510 Cesson-Sévigné, France
 	</p>
       </div>

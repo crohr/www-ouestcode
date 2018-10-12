@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
   </head>
-  <body class=".">
+  <body class="journal/radar">
     <div class="container">
       <div class="header">
         <div class="brand">
@@ -25,8 +25,35 @@
     <div class="container">
       <div class="content">
 
-<h2 id="prerequisites">Prerequisites</h2>
-<pre><code>docker run -it --rm -v $(pwd)/bin:/go/bin golang go get github.com/a8m/mark/cmd/mark
+<h1 id="the-return-of-the-makefile">The return of the Makefile</h1>
+<p>Makefiles are underrated. I find myself putting more of them in projects I
+touch, to encapsulate useful commands such as docker builds, pushes, deploys,
+or development-related tasks.</p>
+<p>This is how this whole blog is generated from markdown files, in about half a
+second:</p>
+<pre><code>INFILES = $(shell find . -name &quot;*.md&quot;)
+OUTFILES = $(INFILES:.md=.html)
+
+all: $(OUTFILES)
+
+%.html: %.md footer.inc header.inc css/style.css
+        m4 -PEIinc header.inc &gt; $@
+        bin/mark -i $&lt; &gt;&gt; $@
+        cat footer.inc &gt;&gt; $@
+        sed -i ':begin;$!N;s/\(&lt;code.*&gt;\)\n/\1/;tbegin;P;D' $@
+        sed -i 's|&lt;body&gt;|&lt;body class=&quot;$(shell dirname $@)&quot;&gt;|' $@
+
+clean:
+        rm -f $(OUTFILES)
+
+preview: all
+        docker build -t ouestcode .
+        docker run -it -p 5678:80 -v $(shell pwd):/usr/share/nginx/html codelicacy
+
+optimize:
+        optipng img/**/*.png
+
+PHONY: all clean
 </code></pre>      </div>
     </div>
     <div class="container">

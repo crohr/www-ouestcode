@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>OuestCode - Ruby / Rails / DevOps Consulting</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="journal/radar">
+    <div class="container">
+      <div class="header">
+        <div class="brand">
+          <a href="/"><img src="/img/logo.svg" class="logo"/></a>
+        </div>
+        <div class="menu">
+          <a href="/products" class="products">Products</a>
+	  <a href="/consulting" class="consulting">Consulting</a>
+	  <a href="/journal" class="journal">Journal</a>
+	  <a href="/about" class="about">About</a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+
+<h1 id="convox">Convox</h1>
+<p>Last update: 11 October 2018</p>
+<p>If I look back at my last 15 years of programming, there were a few things that
+got me pretty excited, and for a few of them changed my career (dates are when
+I discovered them):</p>
+<ul>
+<li>~1998 <strong>Internet</strong></li>
+<li>~2000 <strong>HTML &amp; JavaScript</strong></li>
+<li>~2006 jQuery</li>
+<li>~2006 <strong>Rails 1.x</strong> and the <a href="https://www.youtube.com/watch?v=Gzj723LkRJY&amp;feature=youtu.be">Build a Blog in 15 minutes</a> screencast</li>
+<li>~2008 RESTful APIs</li>
+<li>~2008 Puppet</li>
+<li>~2013 <strong>Docker</strong></li>
+<li>~2016 Convox</li>
+</ul>
+<p><a href="https://convox.com">Convox</a> is the latest thing in that list that blows my
+mind. It&#39;s basically your own Heroku, built only with AWS primitives, and
+incredibly powerful and cheap to run. I&#39;ve been following it since 2016, and
+after they switched over to the second generation of their tool (ALB
+integration) I built a few production clusters with it and couldn&#39;t be happier.</p>
+<p>If you really like Heroku but it&#39;s too expensive for you, or if you really like
+Kubernetes but the learning curve is too steep, then you should give Convox a try.</p>
+<p>You get everything I always dreamed of, perfectly integrated around a single CLI:</p>
+<ul>
+<li>Cluster (a &quot;rack&quot; in convox parlance) autoinstalls in minutes. You just need to provide AWS credentials.</li>
+<li>Can be installed in your own AWS account, completely for free, and without any interactions with the official convox Console.</li>
+<li>Deploy an app from your local directory. The local dir is tarball&#39;ed, uploaded, and the docker image is built on EC2 so that you&#39;re not dependent on your ISP bandwidth.</li>
+<li>All your apps can be made highly available since they&#39;re all behind a load balancer.</li>
+<li>A single ALB (Application Load Balancer) for all your apps, saving huge amounts of $$$.</li>
+<li>Inspect running processes, and scale them up or down in seconds.</li>
+<li>Easy (and secure) way to configure apps through env variables.</li>
+<li>Rolling restarts.</li>
+<li>Integrated health checks.</li>
+<li>Integrated auto-scaling policies.</li>
+<li>Exec into a running container right from your machine.</li>
+<li>SSH into a running EC2 instance right from your machine.</li>
+<li>Centralized logs, and easy tailing.</li>
+<li>Automatic SSL certificate generation.</li>
+<li>Create AWS resources (mysql, postgres, s3, etc.) right from the command line.</li>
+</ul>
+<p>Cost: ~$70/m for a rack with 3 t3.medium machines (spot enabled) that can host
+apps for a total of 12GB RAM.</p>
+<p>It&#39;s hard to believe, but with Convox the hardest thing to do to deploy an app
+right now is building the Dockerfile, which is basically Computing 101 nowadays.</p>
+<p>No more terraform, puppet/ansible/salt/etc., capistrano, shell scripts. You can
+deploy a rack full of machines and deploy your first app in half a day. And
+then 10 more apps the following afternoon, it is that powerful.</p>
+<p>Other niceties:</p>
+<ul>
+<li>Built by 3 early heroku employees, including the awesome @ddollar.</li>
+<li>Private networking is supported, if you need NAT gateways.</li>
+<li>EFS support included, so you can share files across multiple instances of the same process.</li>
+<li>You can enable spot instance bidding for massive savings.</li>
+<li>OpenSource.</li>
+<li>In active development.</li>
+</ul>
+<p>Caveats:</p>
+<ul>
+<li>if you need raw TCP connections for your web services, you may use gen1 apps,
+but I would just deploy them in another way. Convox really shines with
+HTTP(/2) apps.</li>
+<li>it doesn&#39;t have the same traction as Kubernetes, and is dependent on AWS.</li>
+</ul>      </div>
+    </div>
+    <div class="container">
+      <div class="footer">
+	<hr/>
+	<p>
+	  <a href="mailto:contact@ouestcode.com">contact@ouestcode.com</a>
+	  -
+          OuestCode, Cyril Rohr EIRL - 99 rue de la rabine, 35510 Cesson-Sévigné, France
+	</p>
+      </div>
+    </div>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-13023229-1']);
+    _gaq.push(['_setDomainName', 'crohr.me']);
+    _gaq.push(['_trackPageview']);
+    setTimeout("_gaq.push(['_trackEvent', '20_seconds', 'read'])", 15000);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+  </body>
+</html>

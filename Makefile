@@ -14,10 +14,10 @@ clean:
 	rm -f $(OUTFILES)
 
 preview: all
-	docker build -t codelicacy .
-	docker run -it -p 8080:80 -v $(shell pwd):/usr/share/nginx/html codelicacy
+	docker build -t ouestcode .
+	docker run -it -p 5678:80 -v $(shell pwd):/usr/share/nginx/html ouestcode
 
 optimize:
-	optipng img/*.png
+	optipng img/**/*.png
 
 PHONY: all clean

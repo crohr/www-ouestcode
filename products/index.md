@@ -1,4 +1,4 @@
-Codelicacy develops products to improve the day-to-day life of developers and
+OuestCode develops products to improve the day-to-day life of developers and
 ops people. Most of the paid products revolve around Continuous Integration and
 Continuous Delivery.
 

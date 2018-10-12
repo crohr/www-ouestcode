@@ -1,4 +1,4 @@
-Codelicacy is a software development and operations company based in Rennes
+OuestCode is a software development and operations company based in Rennes
 (FR), and run by [Cyril Rohr][about].
 
 You can have a look at my [products][products], which are all at the
