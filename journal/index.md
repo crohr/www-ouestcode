@@ -7,6 +7,8 @@ the time to write a proper blog article.
 * [The return of the Makefile](/journal/radar/the-return-of-the-makefile)
 * [NLB in front of ALB](/journal/radar/nlb-in-front-of-alb)
 * [Autospotting, the simplest way to drastically reduce your AWS bills](/journal/radar/autospotting)
+* Save on your AWS S3 bandwidth bill with lightsail instances.
+* Best practice on AWS: create one isolated account per environment (production, staging, dev), with delegated roles from a primary account.
 
 ### 2018
 
