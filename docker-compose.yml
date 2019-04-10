@@ -7,7 +7,7 @@ networks:
 services:
   web:
     build: .
-    restart: unless-stopped
+    restart: always
     labels:
       - traefik.backend=ouestcode
       - traefik.frontend.rule=Host:ouestcode.com
