@@ -6,12 +6,13 @@ networks:
 
 services:
   web:
-    build: .
-    restart: always
+    build: ./app
+    restart: unless-stopped
     labels:
       - traefik.backend=ouestcode
       - traefik.frontend.rule=Host:ouestcode.com
       - traefik.docker.network=web
       - traefik.port=80
+      - traefik.enable=true
     networks:
       - web
