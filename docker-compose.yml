@@ -10,7 +10,8 @@ services:
     restart: unless-stopped
     labels:
       - traefik.backend=ouestcode
-      - traefik.frontend.rule=Host:ouestcode.com
+      - traefik.frontend.rule=Host:ouestcode.com,crohr.me
+      - traefik.frontend.redirect.entryPoint=https
       - traefik.docker.network=web
       - traefik.port=80
       - traefik.enable=true
