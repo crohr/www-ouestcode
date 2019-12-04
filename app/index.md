@@ -10,8 +10,7 @@ DevOps-related stuff: DEB/RPM **Packaging**, **Docker**, **Cloud Platforms**
 (AWS, Google Cloud, Heroku), Continuous Integration & Continuous Delivery, etc.
 
 I can also offer training sessions on the aforementioned subjects. I also enjoy
-teaching to people from non-IT domains (e.g. Sketch'Up Ruby API workshop for
-Technical Building Drawers).
+teaching to people from non-IT domains (e.g. Sketch'Up Ruby API for architects).
 
 [consulting]: /consulting
 [about]: /about

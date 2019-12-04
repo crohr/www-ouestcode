@@ -1,11 +1,11 @@
-I have 6+ years of consulting under my belt, and have been involved in a wide
+I have 7+ years of consulting under my belt, and have been involved in a wide
 range of technical topics, both in development and operations. If you're
 looking for lead-dev / CTO-like level of skills, I can deliver.
 
 Over the years I developed a strong ability to get up and running on
 new/existing projects very quickly. Also, having products (and paying clients)
 myself means I understand what drives a business and can often find solutions
-that were not envisioned by other members of the project.
+that were not envisioned by other tech people.
 
 ## My main interests right now
 
@@ -19,7 +19,7 @@ improvement in the hosted apps (less time spent processing requests = less
 servers needed), profiling and refactoring hot paths, and last but not least,
 better usage of cloud providers.
 
-* Development of Rails5 apps. Also interested in Next.js and React.
+* Development of Rails apps. Also interested in Next.js and React.
 
 <figure class="airy">
   <img src="/img/consulting/683.png">
@@ -42,9 +42,9 @@ continuous integration system to build, test, deploy, and monitor their
 services.
 
 * Migrating large (and critical) RubyOnRails projects from Rails2.x/Ruby1.8 to
-  Rails4.x/Ruby2.x (and then Rails 5.x), adding a strong test suite and CI
-pipeline to ensure the main features were working with the new stack as we went
-over the numerous changes required to upgrade.
+  Rails4.x/Ruby2.x (and then Rails 5.x and 6.x), adding a strong test suite and
+CI pipeline to ensure the main features were working with the new stack as we
+went over the numerous changes required to upgrade.
 
 * Setup of CI/CD systems.
 
