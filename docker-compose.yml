@@ -1,19 +1,15 @@
-version: "3"
+version: "3.2"
 
 networks:
   web:
-    external: true
+    attachable: true
 
 services:
   web:
+    image: ouestcode-web
     build: ./app
     restart: unless-stopped
-    labels:
-      - traefik.backend=ouestcode
-      - traefik.frontend.rule=Host:ouestcode.com,crohr.me
-      - traefik.frontend.redirect.entryPoint=https
-      - traefik.docker.network=web
-      - traefik.port=80
-      - traefik.enable=true
+    ports:
+      - "30000:80"
     networks:
       - web

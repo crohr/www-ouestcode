@@ -8,7 +8,7 @@
 	  -
           <a href="tel:+33633858332">+33 (0)6 33 85 83 32</a>
 	  <br>
-          OuestCode, Cyril Rohr EIRL
+          OuestCode, Cyril Rohr EIRL, Thorigné-Fouillard, France
 	</p>
       </div>
     </div>
