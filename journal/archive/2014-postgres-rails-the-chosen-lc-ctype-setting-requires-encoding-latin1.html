@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>OuestCode - Ruby / Rails / DevOps Consulting</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="journal/archive">
+    <div class="container">
+      <div class="header">
+        <div class="brand">
+          <a href="/"><img src="/img/logo.svg" class="logo"/></a>
+        </div>
+        <div class="menu">
+          <a href="/products" class="products">Products</a>
+	  <a href="/consulting" class="consulting">Consulting</a>
+	  <a href="/journal" class="journal">Journal</a>
+	  <a href="/about" class="about">About</a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+
+<h1 id="fixing-postgres-utf-8-encoding-error-when-creating-new-databases">Fixing postgres UTF-8 encoding error when creating new databases</h1>
+<p>Quick tip, mainly as a reference for myself.</p>
+<p>I wanted to create a new postgres database from Rails, here is what I did:</p>
+<pre><code>$ sudo apt-get install -y postgresql-9.1
+$ sudo -u postgres createuser myuser --createdb --no-superuser --no-createrole
+$ ./bin/rake db:create
+PG::InvalidParameterValue: ERROR:  encoding UTF8 does not match locale en_US
+DETAIL:  The chosen LC_CTYPE setting requires encoding LATIN1.
+: CREATE DATABASE &quot;my-database&quot; ENCODING = 'utf8'
+...
+
+</code></pre>
+<p>Looks like my locales are wrong. Here was the result of calling <code>locale</code>:</p><pre><code>$ locale
+LANG=en_US.UTF-8
+LANGUAGE=
+LC_CTYPE=&quot;en_US&quot;
+LC_NUMERIC=&quot;en_US&quot;
+LC_TIME=&quot;en_US&quot;
+LC_COLLATE=&quot;en_US&quot;
+LC_MONETARY=&quot;en_US&quot;
+LC_MESSAGES=&quot;en_US&quot;
+LC_PAPER=&quot;en_US&quot;
+LC_NAME=&quot;en_US&quot;
+LC_ADDRESS=&quot;en_US&quot;
+LC_TELEPHONE=&quot;en_US&quot;
+LC_MEASUREMENT=&quot;en_US&quot;
+LC_IDENTIFICATION=&quot;en_US&quot;
+LC_ALL=en_US
+
+</code></pre>
+<p>As you can see, I have <code>en_US</code> values that should be <code>en_US.UTF-8</code> instead. Looking on the internet, you can see various ways of fixing it for a specific database by creating the database directly with the <code>psql</code> CLI, and forcing <code>lc_ctype</code> &amp; co.</p><p>To definitely fix it, the fastest way I found is to do as follows:</p><ol><li><p>Make sure you&#39;ve got your locale properly generated:</p><pre><code> $ sudo locale-gen en_US.UTF-8</code></pre></li><li><p>Update the <code>/etc/default/locale</code> file with the corresponding variables (or use <code>update-locale LANG=xx LC_CTYPE=xx ...</code>):</p><pre><code> $ sudo cat - &gt; /etc/default/locale &lt;&lt;EOF
+ LANG=en_US.UTF-8
+ LANGUAGE=
+ LC_CTYPE=&quot;en_US.UTF-8&quot;
+ LC_NUMERIC=&quot;en_US.UTF-8&quot;
+ LC_TIME=&quot;en_US.UTF-8&quot;
+ LC_COLLATE=&quot;en_US.UTF-8&quot;
+ LC_MONETARY=&quot;en_US.UTF-8&quot;
+ LC_MESSAGES=&quot;en_US.UTF-8&quot;
+ LC_PAPER=&quot;en_US.UTF-8&quot;
+ LC_NAME=&quot;en_US.UTF-8&quot;
+ LC_ADDRESS=&quot;en_US.UTF-8&quot;
+ LC_TELEPHONE=&quot;en_US.UTF-8&quot;
+ LC_MEASUREMENT=&quot;en_US.UTF-8&quot;
+ LC_IDENTIFICATION=&quot;en_US.UTF-8&quot;
+ LC_ALL=en_US.UTF-8
+ EOF</code></pre></li>
+<li><p>Remove postgres (necessary because it looks like the default postgres locale is set at install time based on your system&#39;s locale):</p><pre><code> $ sudo apt-get remove postgresql-9.1 ...</code></pre></li><li><p>Reinstall postgres</p><pre><code> $ sudo apt-get install postgresql-9.1</code></pre></li><li><p>Open a new terminal session (you can also probably just reload your <code>~/.bashrc</code>), and start again:</p><pre><code> $ sudo -u postgres createuser myuser --createdb --no-superuser --no-createrole
+ $ ./bin/rake db:create
+ # success!</code></pre></li>
+</ol>
+<p>This is most probably not the easiest way to do it (please let me know in the comments), but it works.</p>
+<p>Conclusion: Next time, always make sure you correctly set the locales before installing anything :)</p>      </div>
+    </div>
+    <div class="container">
+      <div class="footer">
+	<hr/>
+	<p>
+	  <a href="mailto:contact@ouestcode.com">contact@ouestcode.com</a>
+	  -
+          <a href="tel:+33633858332">+33 (0)6 33 85 83 32</a>
+	  <br>
+          OuestCode, Cyril Rohr EIRL, Thorigné-Fouillard, France
+	</p>
+      </div>
+    </div>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-13023229-1']);
+    _gaq.push(['_setDomainName', 'crohr.me']);
+    _gaq.push(['_trackPageview']);
+    setTimeout("_gaq.push(['_trackEvent', '20_seconds', 'read'])", 15000);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+  </body>
+</html>

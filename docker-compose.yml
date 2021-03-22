@@ -6,8 +6,8 @@ networks:
 
 services:
   web:
-    image: ouestcode-web
-    build: ./app
+    image: "ouestcode-web:${TAG}"
+    build: .
     restart: unless-stopped
     ports:
       - "30000:80"

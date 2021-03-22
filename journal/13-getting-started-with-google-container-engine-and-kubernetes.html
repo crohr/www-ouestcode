@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>OuestCode - Ruby / Rails / DevOps Consulting</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="journal">
+    <div class="container">
+      <div class="header">
+        <div class="brand">
+          <a href="/"><img src="/img/logo.svg" class="logo"/></a>
+        </div>
+        <div class="menu">
+          <a href="/products" class="products">Products</a>
+	  <a href="/consulting" class="consulting">Consulting</a>
+	  <a href="/journal" class="journal">Journal</a>
+	  <a href="/about" class="about">About</a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+
+<h1 id="getting-started-with-google-container-engine-and-kubernetes">Getting started with Google Container Engine and Kubernetes</h1>
+<p>Mainly a cheatsheet for myself, work in progress.</p>
+<h2 id="create-a-cluster">Create a Cluster</h2>
+<p>You should probably create a new project first.
+Then the easiest way is to just do it through the Google Cloud UI, and choose your cluster size, zone(s), etc. This is pretty straightforward.</p>
+<h2 id="install-cli">Install CLI</h2>
+<p>You need <code>gcloud</code> SDK and <code>kubectl</code>. Documentation can be found at <a href="https://cloud.google.com/sdk/downloads">https://cloud.google.com/sdk/downloads</a>. Those can be installed with:</p><pre><code class="lang-bash">curl https://sdk.cloud.google.com | bash
+exec -l $SHELL
+gcloud init
+</code></pre>
+<p>Now install the <code>kubectl</code> component:</p><pre><code class="lang-bash">gcloud components update kubectl
+</code></pre>
+<h2 id="start-a-kubernetes-proxy-and-access-the-ui">Start a kubernetes proxy and access the UI</h2>
+<p>I&#39;m not sure if it&#39;s because I&#39;m running from a remote terminal, or if the instructions given in the developer console are incorrect or incomplete, but I had to setup the <code>application-default</code> login stuff in addition to the <code>gcloud init</code> to make the <code>kubectl</code> work. Otherwise it would return the following:</p><pre><code>$ kubectl proxy
+Unable to connect to the server: oauth2: cannot fetch token: 400 Bad Request
+Response: {
+  &quot;error&quot; : &quot;invalid_grant&quot;
+}
+</code></pre>
+<p>So here are the commands I had to enter:</p>
+<pre><code>gcloud auth application-default login # go through the OAuth dance again
+gcloud container clusters get-credentials cluster-name --zone us-central1-b
+kubectl proxy # or kubectl proxy --address=0.0.0.0 --accept-hosts=your-ip-or-domain-name if need to make it available to the world
+</code></pre>
+<p>Yeah! We can see the Kubernetes dashboard with all the pods and replication sets and services running on my cluster.</p>
+<p>&lt;img width=&quot;1388&quot; alt=&quot;kubernetes-ui&quot; src=&quot;<a href="https://cloud.githubusercontent.com/assets/6114/20731939/62652798-b684-11e6-8617-3736d99b7117.png&quot;&gt;">https://cloud.githubusercontent.com/assets/6114/20731939/62652798-b684-11e6-8617-3736d99b7117.png&quot;&gt;</a></p>
+<p>Next, I&#39;ll try to see if I can easily start a full application from an existing docker-compose file.</p>      </div>
+    </div>
+    <div class="container">
+      <div class="footer">
+	<hr/>
+	<p>
+	  <a href="mailto:contact@ouestcode.com">contact@ouestcode.com</a>
+	  -
+          <a href="tel:+33633858332">+33 (0)6 33 85 83 32</a>
+	  <br>
+          OuestCode, Cyril Rohr EIRL, Thorigné-Fouillard, France
+	</p>
+      </div>
+    </div>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-13023229-1']);
+    _gaq.push(['_setDomainName', 'crohr.me']);
+    _gaq.push(['_trackPageview']);
+    setTimeout("_gaq.push(['_trackEvent', '20_seconds', 'read'])", 15000);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+  </body>
+</html>

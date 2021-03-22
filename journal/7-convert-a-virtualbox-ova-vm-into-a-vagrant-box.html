@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>OuestCode - Ruby / Rails / DevOps Consulting</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="journal">
+    <div class="container">
+      <div class="header">
+        <div class="brand">
+          <a href="/"><img src="/img/logo.svg" class="logo"/></a>
+        </div>
+        <div class="menu">
+          <a href="/products" class="products">Products</a>
+	  <a href="/consulting" class="consulting">Consulting</a>
+	  <a href="/journal" class="journal">Journal</a>
+	  <a href="/about" class="about">About</a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+
+<h1 id="convert-a-virtualbox-ova-vm-into-a-vagrant-box">Convert a VirtualBox .ova VM into a Vagrant box</h1>
+<p>Sometimes distribution providers (such as <a href="https://www.univention.com/downloads/ucs-download/preinstalled-vm-images/download-vm-image/">UCS</a>) only give you VirtualBox <code>.ova</code> files to test their software. Here is how you can easily and non-interactively import a <code>.ova</code> file into a <code>.box</code> for use with Vagrant.</p><pre><code class="lang-bash">$ VBoxManage import ./UCS-Virtualbox-Demo-Image.ova --vsys 0 --eula accept                                                                                                                                   
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+Interpreting /home/crohr/dev/ucs/./UCS-Virtualbox-Demo-Image.ova...                                                                                                                       
+OK.                                                                                                                                                                                                        
+Disks:  vmdisk1 53687091200     -1      http://www.vmware.com/interfaces/specifications/vmdk.html#streamOptimized       UCS-Demo-Image-virtualbox-disk1.vmdk    -1      -1                                 
+...
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+Successfully imported the appliance.                           
+</code></pre>
+<p>Then list your VMs to find the VM ID:</p>
+<pre><code class="lang-bash">$ VBoxManage list vms
+&quot;UCS 4.1&quot; {acef4c0a-35be-4640-a214-be135417f04d}
+</code></pre>
+<p>You can now package that VM as a Vagrant box:</p>
+<pre><code class="lang-bash">$ vagrant package --base acef4c0a-35be-4640-a214-be135417f04d --output UCS.box                                                                                                                             
+==&gt; acef4c0a-35be-4640-a214-be135417f04d: Exporting VM...                                                                                                                                                
+==&gt; acef4c0a-35be-4640-a214-be135417f04d: Compressing package to: /home/crohr/dev/ucs/UCS.box                                                                                           
+</code></pre>
+<p>And add it to the list of your local Vagrant boxes:</p>
+<pre><code class="lang-bash">$ vagrant box add UCS.box --name UCS
+</code></pre>
+<p>Finally, you can create a Vagrantfile to use this box:</p>
+<pre><code class="lang-ruby">Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;UCS&quot;
+  # ...
+end
+</code></pre>
+<p>And <code>vagrant up</code>!</p>      </div>    </div>    <div class="container">      <div class="footer">	<hr/>	<p>	  <a href="mailto:contact@ouestcode.com">contact@ouestcode.com</a>	  -
+          <a href="tel:+33633858332">+33 (0)6 33 85 83 32</a>
+	  <br>
+          OuestCode, Cyril Rohr EIRL, Thorigné-Fouillard, France
+	</p>
+      </div>
+    </div>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-13023229-1']);
+    _gaq.push(['_setDomainName', 'crohr.me']);
+    _gaq.push(['_trackPageview']);
+    setTimeout("_gaq.push(['_trackEvent', '20_seconds', 'read'])", 15000);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+  </body>
+</html>

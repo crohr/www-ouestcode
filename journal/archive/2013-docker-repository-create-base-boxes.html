@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>OuestCode - Ruby / Rails / DevOps Consulting</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="journal/archive">
+    <div class="container">
+      <div class="header">
+        <div class="brand">
+          <a href="/"><img src="/img/logo.svg" class="logo"/></a>
+        </div>
+        <div class="menu">
+          <a href="/products" class="products">Products</a>
+	  <a href="/consulting" class="consulting">Consulting</a>
+	  <a href="/journal" class="journal">Journal</a>
+	  <a href="/about" class="about">About</a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+
+<h1 id="how-to-build-and-publish-base-boxes-for-docker-">How to build and publish base boxes for Docker?</h1>
+<p>If you don&#39;t know about it yet, go check out <a href="http://docker.io">Docker</a>, which makes manipulating LXC containers painless.</p>
+<p>Docker comes with a <a href="https://index.docker.io">registry</a> where you can find images to use for your containers. You can also create and upload your own images in this repository, which is the subject of this article.</p>
+<ul>
+<li><p>Create an account on the Docker index website: <a href="https://index.docker.io">https://index.docker.io</a>.</p></li>
+<li><p>On your box, login:</p><pre><code>    $&gt; docker login
+    Username (): crohr
+    Password: 
+    Email (): hi@example.com
+    Login Succeeded</code></pre></li>
+<li><p>For debian-based boxes, just use the <a href="https://github.com/dotcloud/docker/blob/master/contrib">mkimage-debian.sh script in contrib/</a>:</p><pre><code>    $&gt; ./mkimage-debian.sh crohr/ubuntu lucid http://archive.ubuntu.com/ubuntu
+    ...
+    + img=f7e10b978e8c
+    + docker tag f7e10b978e8c crohr/ubuntu lucid
+    + '[' lucid = wheezy ']'
+    + docker run -i -t crohr/ubuntu:lucid echo success
+    success
+    + '[' lucid '!=' sid -a lucid '!=' unstable ']'
+    ++ docker run crohr/ubuntu:lucid cat /etc/debian_version
+    + ver=squeeze/sid
+    + docker tag f7e10b978e8c crohr/ubuntu squeeze/sid
+    2013/05/24 17:05:40 error: Illegal tag name: squeeze/sid
+
+</code></pre><p>Note: The second tag is not created, but it does not matter (?).</p></li>
+<li><p>Then, check that your image is indeed created:</p><pre><code>    $&gt; docker images
+    REPOSITORY          TAG                 ID                  CREATED
+    crohr/ubuntu        lucid               f7e10b978e8c        34 minutes ago
+    ubuntu              latest              8dbd9e392a96        6 weeks ago
+    ubuntu              12.10               b750fe79269d        8 weeks ago
+    ubuntu              12.04               8dbd9e392a96        6 weeks ago
+    ubuntu              quantal             b750fe79269d        8 weeks ago
+    ubuntu              precise             8dbd9e392a96        6 weeks ago</code></pre></li>
+<li><p>Now push it to the central repository:</p><pre><code>    $&gt; docker push crohr/ubuntu
+    The push refers to a repository [crohr/ubuntu] (len: 1)
+    Processing checksums
+    Sending image list
+    Pushing repository crohr/ubuntu to registry-1.docker.io (1 tags)
+    Pushing f7e10b978e8c15bde845374c490862befb181f0943a0ae2076d070573a435b16
+    145858560/145858560 (100%)
+    Pushing tags for rev [f7e10b978e8c15bde845374c490862befb181f0943a0ae2076d070573a435b16] on {registry-1.docker.io/users/crohr/ubuntu/lucid}</code></pre></li>
+</ul>
+<p>That&#39;s it! Now other people can pull your images using <code>docker pull crohr/ubuntu</code>.</p>      </div>    </div>    <div class="container">      <div class="footer">	<hr/>	<p>	  <a href="mailto:contact@ouestcode.com">contact@ouestcode.com</a>	  -
+          <a href="tel:+33633858332">+33 (0)6 33 85 83 32</a>
+	  <br>
+          OuestCode, Cyril Rohr EIRL, Thorigné-Fouillard, France
+	</p>
+      </div>
+    </div>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-13023229-1']);
+    _gaq.push(['_setDomainName', 'crohr.me']);
+    _gaq.push(['_trackPageview']);
+    setTimeout("_gaq.push(['_trackEvent', '20_seconds', 'read'])", 15000);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+  </body>
+</html>
