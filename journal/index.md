@@ -1,17 +1,12 @@
-### On the radar
+### 2021
 
-Basically, things I can't stop talking about, but for some reason never find
-the time to write a proper blog article.
-
-* [Convox, the best thing since Docker](/journal/radar/convox)
-* [The return of the Makefile](/journal/radar/the-return-of-the-makefile)
-* [NLB in front of ALB](/journal/radar/nlb-in-front-of-alb)
-* [Autospotting, the simplest way to drastically reduce your AWS bills](/journal/radar/autospotting)
-* Save on your AWS S3 bandwidth bill with lightsail instances.
-* Best practice on AWS: create one isolated account per environment (production, staging, dev), with delegated roles from a primary account.
+* [Shipping Ruby and Rails apps as native Linux packages](/journal/20-euruko2021-pkgr)
 
 ### 2018
 
+* [Autospotting, the simplest way to drastically reduce your AWS bills](/journal/radar/autospotting)
+* [The return of the Makefile](/journal/radar/the-return-of-the-makefile)
+* [Convox, the best thing since Docker](/journal/radar/convox)
 * [Announcing PullPreview](/journal/18-announcing-pullpreview)
 
 ### 2017
