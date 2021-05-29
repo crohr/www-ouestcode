@@ -1,8 +1,8 @@
 # Packaging Rails applications for Linux
 
-**From bare code to deployed app in 5 minutes.
+**From bare code to deployed app in 5 minutes.**
 
-This is a lightning talk given at Euruko2021.
+This is a lightning talk given at Euruko2021 on May 29th 2021.
 
 **Abstract:**
 
@@ -13,3 +13,4 @@ Although Docker has allowed to ship applications almost anywhere, native package
 In this presentation you'll learn how to package a Rails application for the main Linux distributions available. You'll also learn how to host the resulting packages, and apply the same recipe to package a Ruby CLI that can be shipped to users.
 
 [Slides](./euruko2021-pkgr.pdf)
+[Video](https://ouestcode.s3.amazonaws.com/public/packaging-rails-apps-euruko2021.mp4)
