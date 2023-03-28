@@ -15,7 +15,7 @@ clean:
 
 preview: all
 	docker build -t ouestcode .
-	docker run -it -p 5678:80 -v $(shell pwd):/usr/share/nginx/html ouestcode
+	docker run -it -p 3000:80 -v $(shell pwd):/usr/share/nginx/html ouestcode
 
 optimize:
 	optipng img/**/*.png

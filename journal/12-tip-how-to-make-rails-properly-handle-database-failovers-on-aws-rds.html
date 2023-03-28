@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>OuestCode - Ruby / Rails / DevOps Consulting</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="preload" href="/css/style.css" as="style" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
   <body class="journal">
     <div class="container">
       <div class="header">
         <div class="brand">
-          <a href="/"><img src="/img/logo.svg" class="logo"/></a>
+          <a href="/"><img src="/img/logo.svg" class="logo" /></a>
         </div>
         <div class="menu">
           <a href="/products" class="products">Products</a>
-	  <a href="/consulting" class="consulting">Consulting</a>
-	  <a href="/journal" class="journal">Journal</a>
-	  <a href="/about" class="about">About</a>
+          <a href="/consulting" class="consulting">Consulting</a>
+          <a href="/journal" class="journal">Journal</a>
+          <a href="/about" class="about">About</a>
         </div>
       </div>
     </div>
     <div class="container">
-      <div class="content">
-
+      <div class="content"></div>
+    </div>
+  </body>
+</html>
 <h1 id="tip-how-to-make-rails-properly-handle-database-failovers-on-aws-rds">Tip: How to make Rails properly handle database failovers on AWS RDS</h1>
 <p>Problem: a client had multiple rails apps pointing to a few RDS databases, in multi-AZ mode. However, after initiating a database failover, the apps would appear to be stuck trying to reach the old database master, instead of gracefully killing the stale connection, and reconnecting.</p>
 <p>After a few tries and a lot of digging, here is the configuration for Rails&#39; <code>DATABASE_URL</code> that appears to work for our multi-AZ <strong>PostgreSQL</strong> RDS instances:</p><pre><code>DATABASE_URL=postgres://dbuser:dbpassword@rds-dbhost:5432/dbname?pool=5&amp;encoding=unicode&amp;reconnect=true&amp;connect_timeout=2&amp;keepalives_idle=30&amp;keepalives_interval=10&amp;keepalives_count=2&amp;checkout_timeout=5&amp;reaping_frequency=10
@@ -53,17 +56,6 @@ reaping_frequency: 10
 	</p>
       </div>
     </div>
-    <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-13023229-1']);
-    _gaq.push(['_setDomainName', 'crohr.me']);
-    _gaq.push(['_trackPageview']);
-    setTimeout("_gaq.push(['_trackEvent', '20_seconds', 'read'])", 15000);
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-    </script>
+    <script src="https://cdn.usefathom.com/script.js" data-site="ZCOSYLGT" defer></script>
   </body>
 </html>
