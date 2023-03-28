@@ -1,5 +1,7 @@
 INFILES = $(shell find . -name "*.md")
 OUTFILES = $(INFILES:.md=.html)
+DOCKER_CONTEXT = production
+VERSION = $(shell date -u +%Y%m%d%H%M%S)
 
 all: $(OUTFILES)
 
@@ -22,8 +24,11 @@ optimize:
 
 PHONY: all clean
 
+bump:
+	sed -i "s|ouestcode-web.*|ouestcode-web:$(VERSION)\"|g" docker-compose.yml
+
 build:
-	docker-compose build
+	docker --context $(DOCKER_CONTEXT) compose build
 
 deploy: build
-	docker stack deploy -c docker-compose.yml ouestcode-web
+	docker --context $(DOCKER_CONTEXT) stack deploy -c docker-compose.yml ouestcode-web

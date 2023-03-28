@@ -6,7 +6,7 @@ networks:
 
 services:
   web:
-    image: "ouestcode-web:${TAG}"
+    image: "ouestcode-web:20230328184031"
     build: .
     restart: unless-stopped
     ports:
