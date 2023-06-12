@@ -4,13 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>OuestCode - Ruby / Rails / DevOps Consulting</title>
-    <link rel="preload" href="/css/style.css" as="style" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="preload" href="/css/style.css?sad=sd" as="style" />
+    <link rel="stylesheet" href="/css/style.css?sad=sd" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
   <body>
     <div class="container">
+      <div class="announcement">
+        Check out my latest project <a href="https://pullpreview.com">PullPreview</a> - Deployment previews for your pull requests, on servers you control
+      </div>
       <div class="header">
         <div class="brand">
           <a href="/"><img src="/img/logo.svg" class="logo" /></a>

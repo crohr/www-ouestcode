@@ -16,10 +16,7 @@ html {
  */
 
 body {
-  margin: 0 auto;
-  max-width: 760px;
-  line-height: 1.75;
-  padding: 0 1rem;
+  margin: 0;
 }
 
 /* HTML5 display definitions
@@ -1126,13 +1123,11 @@ textarea {
 
 /** CUSTOM */
 body {
-  margin-top: 1em;
-  margin-bottom: 1em;
   font-family: 'helvetica neue', helvetica, futura;
-  font-size: 18px;
-  line-height: 28px;
-  margin-left: 1.5em;
-  margin-right: 1.5em;
+  margin: 0 auto;
+  max-width: 760px;
+  line-height: 1.75;
+  padding: 0 1rem;
 }
 .container {
   max-width: 768px;
@@ -1211,7 +1206,16 @@ pre {
 h2 {
   /* margin-top: 1.5em; */
 }
-
+.announcement {
+  padding: 0.5em 1em;
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  margin-bottom: 1em;
+  border: 1px solid #eee;
+}
+img {
+  max-width: 100%;
+}
 /* responsive */
 @media only screen and (max-width: 500px) {
   .logo {
